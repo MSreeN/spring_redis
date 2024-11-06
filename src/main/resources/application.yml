@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: spring-redis
+  data:
+    redis:
+      host: localhost
+      port: 6378
+
+
+
+server:
+  port: 8081
