@@ -19,10 +19,9 @@ public class RedisService {
         String name = (String) redisTemplate.opsForValue().get("name");
         String personName = (String) redisTemplate.opsForHash().get("names", "pone");
         redisTemplate.opsForHash().put("games", "gone", "cricket");
-        int i = 0;
     }
 
-    @Cacheable(key = "#num", value = "math")
+    @Cacheable(key = "'fib'", value = "math")
     public int fibService(int num){
         if(num == 0 || num == 1) return num;
         return fibService(num - 1) + fibService(num - 2);

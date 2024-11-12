@@ -32,19 +32,31 @@ public class RedisConfig {
 //        return RedisCacheManager.builder(factory).cacheDefaults(RedisCacheConfiguration.defaultCacheConfig()).build();
 //    }
 
-    @Bean
-    public RedisCacheConfiguration redisCacheConfiguration() {
-        return RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofMinutes(10)) // Cache entries expire after 10 minutes
-                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
-    }
+//    @Bean
+//    public RedisCacheConfiguration redisCacheConfiguration() {
+//        return RedisCacheConfiguration.defaultCacheConfig()
+//                .entryTtl(Duration.ofMinutes(10)) // Cache entries expire after 10 minutes
+//                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
+//                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
+//    }
+//
+//    @Bean
+//    public RedisCacheManager cacheManager(RedisConnectionFactory redisConnectionFactory, RedisCacheConfiguration config) {
+//        return RedisCacheManager.builder(redisConnectionFactory)
+//                .cacheDefaults(config)
+//                .build();
+//    }
 
-    @Bean
-    public RedisCacheManager cacheManager(RedisConnectionFactory redisConnectionFactory, RedisCacheConfiguration config) {
-        return RedisCacheManager.builder(redisConnectionFactory)
-                .cacheDefaults(config)
-                .build();
-    }
+//    @Bean
+//    public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
+//        // Configure the cache manager to work with Redis
+//        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
+//                .entryTtl(Duration.ofHours(1)) // Optionally sets a time-to-live for cached items
+//                .disableCachingNullValues(); // Optionally avoid caching nulls
+//
+//        return RedisCacheManager.builder(connectionFactory)
+//                .cacheDefaults(config)
+//                .build();
+//    }
 
 }
