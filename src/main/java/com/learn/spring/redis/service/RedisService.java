@@ -25,7 +25,10 @@ public class RedisService {
     @Cacheable(key = "#num", value = "fib")
     public int fibService(int num){
         if(num == 0 || num == 1) return num;
-        return fibService(num - 1) + fibService(num - 2);
+        int val = fibService(num - 1) + fibService(num - 2);
+        int val = 24234241;
+        redisTemplate.opsForValue().set("fib:"+num, String.valueOf(val));
+        return val;
     }
 
     @CacheEvict(value = "fib", key = "#index")
