@@ -2,10 +2,7 @@ package com.learn.spring.redis.controller;
 
 import com.learn.spring.redis.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/fib")
@@ -23,5 +20,10 @@ public class RedisController {
     @GetMapping("/hello")
     public String simple(){
         return "hello";
+    }
+
+    @DeleteMapping("/{index}")
+    public String cacheDelete(@PathVariable int index){
+        return redisService.cacheEvict(index);
     }
 }

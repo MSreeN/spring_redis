@@ -20,42 +20,22 @@ public class RedisConfig {
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory){
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new StringRedisSerializer());
-        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-        redisTemplate.setHashValueSerializer(new StringRedisSerializer());
+        redisTemplate.setKeySerializer(new GenericJackson2JsonRedisSerializer());
+        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        redisTemplate.setHashKeySerializer(new GenericJackson2JsonRedisSerializer());
+        redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
         return redisTemplate;
     }
 
+
 //    @Bean
 //    public RedisCacheManager redisCacheManager(RedisConnectionFactory factory){
-//        return RedisCacheManager.builder(factory).cacheDefaults(RedisCacheConfiguration.defaultCacheConfig()).build();
-//    }
-
-//    @Bean
-//    public RedisCacheConfiguration redisCacheConfiguration() {
-//        return RedisCacheConfiguration.defaultCacheConfig()
-//                .entryTtl(Duration.ofMinutes(10)) // Cache entries expire after 10 minutes
+//        RedisCacheConfiguration cacheConfig = RedisCacheConfiguration.defaultCacheConfig()
 //                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
 //                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
-//    }
 //
-//    @Bean
-//    public RedisCacheManager cacheManager(RedisConnectionFactory redisConnectionFactory, RedisCacheConfiguration config) {
-//        return RedisCacheManager.builder(redisConnectionFactory)
-//                .cacheDefaults(config)
-//                .build();
-//    }
-
-//    @Bean
-//    public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
-//        // Configure the cache manager to work with Redis
-//        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-//                .entryTtl(Duration.ofHours(1)) // Optionally sets a time-to-live for cached items
-//                .disableCachingNullValues(); // Optionally avoid caching nulls
-//
-//        return RedisCacheManager.builder(connectionFactory)
-//                .cacheDefaults(config)
+//        return RedisCacheManager.builder(factory)
+//                .cacheDefaults(cacheConfig)
 //                .build();
 //    }
 
