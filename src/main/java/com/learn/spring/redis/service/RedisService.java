@@ -3,10 +3,14 @@ package com.learn.spring.redis.service;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import java.util.Random;
+import java.util.stream.IntStream;
 
 @Component
 public class RedisService {
@@ -39,8 +43,13 @@ public class RedisService {
     }
 
     @Scheduled(fixedRate = 10000)
-    @CacheEvict(value = "fib", key = "'40'")
+//    @CacheEvict(value = "fib", key = "'40'")
     public void scheduledCacheEvict(){
+        redisTemplate.delete("fib::40");
+    }
 
+    @CachePut(key = "'value'", value = "lucky")
+    public int luckyNumber(){
+        return new Random().nextInt();
     }
 }

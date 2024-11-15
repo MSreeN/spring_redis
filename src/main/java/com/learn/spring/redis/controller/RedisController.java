@@ -26,4 +26,9 @@ public class RedisController {
     public String cacheDelete(@PathVariable int index){
         return redisService.cacheEvict(index);
     }
+
+    @GetMapping("/lv")
+    public int luckyValue(){
+        return redisService.luckyNumber();
+    }
 }
