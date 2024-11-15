@@ -28,15 +28,15 @@ public class RedisConfig {
     }
 
 
-//    @Bean
-//    public RedisCacheManager redisCacheManager(RedisConnectionFactory factory){
-//        RedisCacheConfiguration cacheConfig = RedisCacheConfiguration.defaultCacheConfig()
-//                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
-//                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
-//
-//        return RedisCacheManager.builder(factory)
-//                .cacheDefaults(cacheConfig)
-//                .build();
-//    }
+    @Bean
+    public RedisCacheManager redisCacheManager(RedisConnectionFactory factory){
+        RedisCacheConfiguration cacheConfig = RedisCacheConfiguration.defaultCacheConfig()
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
+
+        return RedisCacheManager.builder(factory)
+                .withCacheConfiguration("fib", cacheConfig)
+                .build();
+    }
 
 }
